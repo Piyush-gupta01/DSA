@@ -4,26 +4,13 @@ public:
         vector<vector<int>> ans;
 
         for (int i = 0; i < numRows; i++) {
-            vector<int> row;
-
-            for (int j = 0; j <= i; j++) {
-                if (j == 0 || j == i) {
-                    row.push_back(1);
-                }
-                else {
-                    int value = 1;
-
-                    for (int k = 1; k <= j; k++) {
-                        value = value * (i - k + 1) / k;
-                    }
-
-                    row.push_back(value);
-                }
+            vector<int> row(i + 1, 1);
+            
+            for (int j = 1; j < i; j++) {
+                row[j] = ans[i - 1][j - 1] + ans[i - 1][j];
             }
-
             ans.push_back(row);
         }
-
         return ans;
     }
 };

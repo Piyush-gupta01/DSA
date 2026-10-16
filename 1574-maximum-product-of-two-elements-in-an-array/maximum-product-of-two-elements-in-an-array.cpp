@@ -1,14 +1,16 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        int answer = INT_MIN;
+        int first = 0;
+        int second = 0;
         for(int i=0; i<=nums.size()-1; i++){
-            for(int j=i+1; j<=nums.size()-1; j++){
-                if((nums[i] - 1) * (nums[j] - 1) > answer){
-                    answer = (nums[i] - 1) * (nums[j] - 1);
-                }
+            if(nums[i] > first){
+                second = first;
+                first = nums[i];
+            }else if(nums[i] > second){
+                second = nums[i];
             }
         }
-        return answer;
+        return (first - 1)*(second - 1);
     }
 };
